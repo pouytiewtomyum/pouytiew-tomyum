@@ -2,15 +2,18 @@
 
 import React from "react";
 import Image from "next/image";
-import { FlameIcon, StarIcon, BowlIcon, MapPinIcon, ChiliIcon } from "./Icons";
+import { useLanguage } from "../context/LanguageContext";
 
 interface HeroProps {
   onScrollTo: (sectionId: string) => void;
 }
 
 export function Hero({ onScrollTo }: HeroProps) {
+  const { lang } = useLanguage();
+  const isTh = lang === "th";
+
   return (
-    <section id="hero" className="relative overflow-hidden pt-8 pb-16 lg:py-20 bg-linear-to-b from-amber-50/50 via-rose-50/30 to-[#FFFDF9]">
+    <section id="hero" className="relative overflow-hidden pt-8 lg:py-20 bg-linear-to-b from-amber-50/50 via-rose-50/30 to-[#FFFDF9]">
       {/* Background colorful decorative glows */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-linear-to-tr from-rose-400/20 via-amber-300/20 to-orange-400/20 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-1/4 -right-20 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -24,26 +27,38 @@ export function Hero({ onScrollTo }: HeroProps) {
             
             {/* Top pill badge */}
             <div className="inline-flex items-center gap-2 bg-linear-to-r from-rose-500/10 via-amber-500/10 to-rose-500/10 border border-rose-200/80 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-rose-700 shadow-sm">
-              <FlameIcon className="w-4 h-4 text-rose-500 animate-pulse" />
-              <span>Authentic Thai Street Food Experience</span>
+              <i className="fa-solid fa-fire text-rose-500 animate-pulse"></i>
+              <span>{isTh ? "ก๋วยเตี๋ยวต้มยำโบราณ" : "Authentic Thai Street Food Experience"}</span>
               <span className="text-rose-400">&bull;</span>
-              <span className="font-bold text-zinc-700">ก๋วยเตี๋ยวต้มยำโบราณ</span>
+              <span className="font-bold text-zinc-700">{isTh ? "รสแซ่บถึงใจ" : "Bold & Soulful"}</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 leading-[1.12]">
-              Fiery, Tangy &amp; <br />
-              <span className="bg-linear-to-r from-rose-600 via-orange-500 to-amber-500 bg-clip-text text-transparent">
-                Unapologetically Soulful
-              </span>{" "}
-              Tom Yum Noodles
+              {isTh ? (
+                <>
+                  แซ่บ กลมกล่อม <br />
+                  <span className="bg-linear-to-r from-rose-600 via-orange-500 to-amber-500 bg-clip-text text-transparent">
+                    จัดจ้านถึงใจ
+                  </span>{" "}
+                  ต้มยำมะนาวสดแท้ <strong>100%</strong>
+                </>
+              ) : (
+                <>
+                  Fiery, Tangy &amp; <br />
+                  <span className="bg-linear-to-r from-rose-600 via-orange-500 to-amber-500 bg-clip-text text-transparent">
+                    Unapologetically Soulful
+                  </span>{" "}
+                  Tom Yum Noodles
+                </>
+              )}
             </h1>
 
             {/* Subheading Information */}
             <p className="text-base sm:text-lg text-zinc-600 max-w-2xl leading-relaxed">
-              ยินดีต้อนรับสู่ <strong>ป๋วยเตี๋ยวต้มยำ</strong> ต้นตำรับความจัดจ้านแห่งกรุงเทพฯ 
-              น้ำซุปกระดูกเคี่ยวไฟอ่อน 12 ชั่วโมง หอมพริกเผาเคี่ยวเตาถ่าน มะนาวแป้นสดแท้ 100% 
-              และถั่วลิสงคั่วใหม่ทุกเช้า รสชาติกลมกล่อม เปรี้ยว เผ็ด หวาน เค็ม ครบเครื่องต้มยำโบราณแท้
+              {isTh
+                ? "ร้าน ป๋วยเตี๋ยวต้มยำ ร้านก๋วยเตี๋ยวต้มยำใกล้ไอคอนสยาม น้ำซุปกระดูกหมูและหัวไชเท้า ใช้มะนาวสดทุกชาม รสชาติกลมกล่อม เปรี้ยว เผ็ด หวาน เค็ม ครบเครื่องต้มยำโบราณแท้ มีข้าวแกงรสจัดจ้านให้เลือกไม่ซ้ำในแต่ละวัน มีของกินเล่นให้รับประทานควบคู่กับก๋วยเตี๋ยว เพิ่มความอร่อยจนถึงขีดสุด"
+                : "Discover Pouy Tiew Tom Yum near ICONSIAM—where rich pork bone and daikon broth meets 100% freshly squeezed lime for the perfect 4-flavor harmony. Pair your bowl with bold daily rotating Thai meals and crispy snacks for an unforgettable feast."}
             </p>
 
             {/* Action buttons */}
@@ -52,38 +67,19 @@ export function Hero({ onScrollTo }: HeroProps) {
                 onClick={() => onScrollTo("menu")}
                 className="w-full sm:w-auto flex items-center justify-center gap-3 bg-linear-to-r from-rose-600 via-red-500 to-amber-500 hover:from-rose-700 hover:to-amber-600 text-white font-black px-8 py-4 rounded-2xl shadow-xl shadow-rose-500/30 hover:scale-[1.02] active:scale-95 transition-all text-base group"
               >
-                <BowlIcon className="w-5 h-5 text-amber-200" />
-                <span>Explore Full Menu</span>
-                <span className="bg-white/20 text-white text-xs px-2 py-0.5 rounded-md font-bold">เมนูทั้งหมด</span>
+                <i className="fa-solid fa-bowl-food text-amber-200"></i>
+                <span>{isTh ? "ดูเมนูทั้งหมด" : "Explore Full Menu"}</span>
               </button>
 
               <button
                 onClick={() => onScrollTo("branches")}
                 className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 border-2 border-zinc-200 hover:border-rose-300 text-zinc-800 font-bold px-7 py-4 rounded-2xl shadow-sm hover:shadow-md active:scale-95 transition-all text-base"
               >
-                <MapPinIcon className="w-5 h-5 text-rose-500" />
-                <span>Locations &amp; Hours</span>
+                <i className="fa-solid fa-location-dot text-rose-500"></i>
+                <span>{isTh ? "สาขาและเวลาเปิด" : "Locations & Hours"}</span>
               </button>
             </div>
 
-            {/* Restaurant Quick Fact Pillars */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-4 border-t border-zinc-200/60 w-full max-w-xl">
-              <div className="bg-white/90 backdrop-blur-sm p-3.5 rounded-2xl border border-rose-100 shadow-sm text-center lg:text-left">
-                <div className="text-xl sm:text-2xl font-black text-rose-600">12+ Hours</div>
-                <div className="text-xs font-semibold text-zinc-600 mt-0.5">Slow Broth Simmer</div>
-                <div className="text-[10px] text-zinc-400">ซุปกระดูกเคี่ยวเข้มข้น</div>
-              </div>
-              <div className="bg-white/90 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm text-center lg:text-left">
-                <div className="text-xl sm:text-2xl font-black text-amber-600">100% Real</div>
-                <div className="text-xs font-semibold text-zinc-600 mt-0.5">Fresh Squeezed Lime</div>
-                <div className="text-[10px] text-zinc-400">มะนาวแป้นสดแท้</div>
-              </div>
-              <div className="bg-white/90 backdrop-blur-sm p-3.5 rounded-2xl border border-orange-100 shadow-sm text-center lg:text-left">
-                <div className="text-xl sm:text-2xl font-black text-orange-600">Daily Fresh</div>
-                <div className="text-xs font-semibold text-zinc-600 mt-0.5">Roasted Peanuts</div>
-                <div className="text-[10px] text-zinc-400">ถั่วลิสงคั่วใหม่ทุกวัน</div>
-              </div>
-            </div>
 
           </div>
 
@@ -111,10 +107,10 @@ export function Hero({ onScrollTo }: HeroProps) {
                   {/* Top Badges */}
                   <div className="absolute top-4 left-4 flex gap-2">
                     <span className="bg-rose-600/95 backdrop-blur-md text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
-                      Signature Bowl
+                      {isTh ? "ชามซิกเนเจอร์" : "Signature Bowl"}
                     </span>
-                    <span className="bg-amber-400 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md">
-                      <StarIcon className="w-3.5 h-3.5 fill-current" /> 4.9 (3,200+ Reviews)
+                    <span className="bg-amber-400 text-zinc-950 text-xs font-black px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md">
+                      <i className="fa-solid fa-star text-zinc-950 text-xs"></i> 4.9 (3,200+ Reviews)
                     </span>
                   </div>
 
@@ -122,27 +118,29 @@ export function Hero({ onScrollTo }: HeroProps) {
                   <div className="absolute bottom-5 left-5 right-5 text-white">
                     <div className="flex items-center gap-2 mb-1.5">
                       <span className="text-yellow-400 font-extrabold text-xs uppercase tracking-wide">
-                        ชามซิกเนเจอร์ยอดนิยมอันดับ 1
+                        {isTh ? "ชามยอดนิยมอันดับ 1" : "#1 Best Seller Bowl"}
                       </span>
-                      <div className="flex text-rose-400">
-                        <ChiliIcon className="w-3.5 h-3.5" />
-                        <ChiliIcon className="w-3.5 h-3.5" />
+                      <div className="flex text-rose-400 gap-1">
+                        <i className="fa-solid fa-pepper-hot text-xs"></i>
+                        <i className="fa-solid fa-pepper-hot text-xs"></i>
                       </div>
                     </div>
                     <h3 className="text-2xl font-black tracking-tight leading-tight">
-                      Royal Jumbo Prawn Tom Yum
+                      {isTh ? "ก๋วยเตี๋ยวต้มยำกุ้งแม่น้ำน้ำข้น ยักษ์ใหญ่" : "Royal Jumbo Prawn Tom Yum"}
                     </h3>
                     <p className="text-xs sm:text-sm text-zinc-200 line-clamp-2 mt-1">
-                      ก๋วยเตี๋ยวต้มยำกุ้งแม่น้ำน้ำข้น มะนาวแป้นสด &bull; ไข่ต้มยางมะตูม &bull; เกี๊ยวกรอบทอง
+                      {isTh
+                        ? "สูตรลับน้ำข้นกลมกล่อม มะนาวแป้นสดแท้ ไข่ต้มยางมะตูม และเกี๊ยวกรอบทอง"
+                        : "Creamy roasted chili broth, fresh river prawns, soft-boiled duck egg, & crispy wontons."}
                     </p>
 
                     <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/20">
                       <div>
-                        <span className="text-xs text-zinc-300 block">Regular Price</span>
+                        <span className="text-xs text-zinc-300 block">{isTh ? "ราคา" : "Regular Price"}</span>
                         <div className="text-2xl font-black text-amber-300">฿189</div>
                       </div>
                       <span className="text-xs bg-white/20 text-white font-bold px-3 py-1.5 rounded-xl backdrop-blur-sm">
-                        Dine-In &amp; Delivery
+                        {isTh ? "ทานที่ร้าน & เดลิเวอรี" : "Dine-In & Delivery"}
                       </span>
                     </div>
                   </div>
@@ -153,8 +151,12 @@ export function Hero({ onScrollTo }: HeroProps) {
               <div className="absolute -top-4 -right-4 bg-white/95 backdrop-blur-md border border-emerald-100 shadow-xl px-4 py-2 rounded-2xl flex items-center gap-2.5">
                 <span className="text-2xl">🍋</span>
                 <div>
-                  <div className="text-xs font-extrabold text-emerald-800">100% Lime Juice</div>
-                  <div className="text-[10px] text-zinc-500 font-medium">มะนาวสดแท้ ไม่ใช้ผง</div>
+                  <div className="text-xs font-extrabold text-emerald-800">
+                    {isTh ? "มะนาวแป้นสดแท้ 100%" : "100% Real Lime Juice"}
+                  </div>
+                  <div className="text-[10px] text-zinc-500 font-medium">
+                    {isTh ? "คั้นสดชามต่อชาม" : "Never powdered"}
+                  </div>
                 </div>
               </div>
 
@@ -162,8 +164,12 @@ export function Hero({ onScrollTo }: HeroProps) {
               <div className="absolute -bottom-5 -left-4 bg-white/95 backdrop-blur-md border border-amber-100 shadow-xl px-4 py-2.5 rounded-2xl flex items-center gap-2.5">
                 <span className="text-2xl">🥟</span>
                 <div>
-                  <div className="text-xs font-extrabold text-amber-800">Crispy Golden Wontons</div>
-                  <div className="text-[10px] text-zinc-500 font-medium">เกี๊ยวกรอบทอง ทอดใหม่</div>
+                  <div className="text-xs font-extrabold text-amber-800">
+                    {isTh ? "เกี๊ยวกรอบทองคำ" : "Crispy Golden Wontons"}
+                  </div>
+                  <div className="text-[10px] text-zinc-500 font-medium">
+                    {isTh ? "ทอดใหม่กรอบสนั่น" : "Freshly fried daily"}
+                  </div>
                 </div>
               </div>
 

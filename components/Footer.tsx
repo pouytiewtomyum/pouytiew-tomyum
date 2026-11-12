@@ -1,13 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { BowlIcon, FlameIcon, SparklesIcon, CheckIcon } from "./Icons";
+import { useLanguage } from "../context/LanguageContext";
 
 interface FooterProps {
   onScrollTo: (sectionId: string) => void;
 }
 
 export function Footer({ onScrollTo }: FooterProps) {
+  const { lang } = useLanguage();
+  const isTh = lang === "th";
+
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
 
@@ -22,146 +25,105 @@ export function Footer({ onScrollTo }: FooterProps) {
   return (
     <footer className="bg-zinc-950 text-white pt-16 pb-12 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Top Newsletter Card */}
-        <div className="bg-gradient-to-r from-rose-900/40 via-zinc-900 to-amber-900/30 rounded-3xl p-8 sm:p-10 border border-zinc-800 mb-16 relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-2">
-              <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-                <SparklesIcon className="w-3.5 h-3.5 text-amber-400" />
-                Join The Spice Club
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-white">
-                Get 15% Off Your Next Bowl + Free Crispy Wonton
-              </h3>
-              <p className="text-xs sm:text-sm text-zinc-400 max-w-xl">
-                รับข่าวสารโปรโมชั่นเด็ด เมนูลับประจำซีซั่น และโค้ดส่วนลดพิเศษก่อนใคร ส่งตรงเข้าอีเมลคุณ
-              </p>
-            </div>
-
-            <div className="lg:col-span-5">
-              {isSubscribed ? (
-                <div className="bg-emerald-950/60 border border-emerald-500/40 p-4 rounded-2xl flex items-center gap-3 text-emerald-300">
-                  <CheckIcon className="w-6 h-6 shrink-0" />
-                  <div className="text-xs font-bold">
-                    Welcome to the Spice Club! Check your inbox for voucher code <strong className="text-amber-300">SPICY15</strong>.
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address..."
-                    className="flex-1 bg-zinc-900 border border-zinc-700 rounded-2xl px-4 py-3.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-rose-500"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-gradient-to-r from-rose-600 to-amber-500 hover:from-rose-500 hover:to-amber-400 text-white font-black text-xs px-5 py-3.5 rounded-2xl shadow-lg transition-all active:scale-95 whitespace-nowrap"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
 
         {/* Main Footer Links */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-zinc-800 text-sm">
-          
+        
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-600 to-amber-500 flex items-center justify-center text-white shadow-lg">
-                <BowlIcon className="w-6 h-6" />
+              <div className="w-10 h-10 rounded-2xl bg-linear-to-tr from-rose-600 to-amber-500 flex items-center justify-center text-white shadow-lg">
+                <i className="fa-solid fa-bowl-food text-xl"></i>
               </div>
               <div>
                 <span className="text-xl font-black tracking-tight text-white">POUY TIEW</span>
-                <span className="text-xs text-rose-500 font-bold block">ป๋วยเตี๋ยวต้มยำโบราณ</span>
+                <span className="text-sm text-rose-500 font-bold block">
+                  {isTh ? "ป๋วยเตี๋ยวต้มยำโบราณ" : "Authentic Tom Yum Bar"}
+                </span>
               </div>
             </div>
-            <p className="text-xs text-zinc-400 leading-relaxed max-w-sm">
-              Authentic Bangkok street noodle bar dedicated to bold, soulful, artisanal Tom Yum with hand-squeezed limes, slow-simmered bone broth, and freshly toasted peanuts.
+            <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
+              {isTh
+                ? "ร้านก๋วยเตี๋ยวต้มยำโบราณใจกลางกรุงเทพฯ คัดสรรวัตถุดิบสดแท้ มะนาวแป้นคั้นสด ซุปเคี่ยวกระดูก 12 ชม. และถั่วลิสงคั่วใหม่ทุกเช้า"
+                : "Authentic Bangkok street noodle bar dedicated to bold, soulful, artisanal Tom Yum with hand-squeezed limes, slow-simmered bone broth, and freshly toasted peanuts."}
             </p>
-            <div className="flex items-center gap-3 pt-2 text-zinc-400 text-xs">
-              <span className="hover:text-rose-400 cursor-pointer transition-colors">Instagram</span>
+            <div className="flex flex-wrap items-center gap-3 pt-2 text-zinc-400 text-sm">
+              <span className="hover:text-rose-400 cursor-pointer transition-colors flex items-center gap-1.5"><i className="fa-brands fa-facebook"></i> Facebook</span>
               <span>&bull;</span>
-              <span className="hover:text-rose-400 cursor-pointer transition-colors">TikTok</span>
-              <span>&bull;</span>
-              <span className="hover:text-rose-400 cursor-pointer transition-colors">Facebook</span>
-              <span>&bull;</span>
-              <span className="hover:text-rose-400 cursor-pointer transition-colors">LINE: @pouytiew</span>
+              <span className="hover:text-rose-400 cursor-pointer transition-colors flex items-center gap-1.5"><i className="fa-solid fa-phone"></i>081-333-2489</span>
             </div>
           </div>
 
           {/* Quick Nav */}
           <div>
-            <h4 className="font-black text-white text-sm mb-3 uppercase tracking-wider">Explore</h4>
-            <ul className="space-y-2 text-xs text-zinc-400 font-medium">
+            <h4 className="font-black text-white text-sm mb-3 uppercase tracking-wider">
+              {isTh ? "เมนู & เรื่องราว" : "Navigation"}
+            </h4>
+            <ul className="space-y-2 text-sm text-zinc-400 font-medium">
               <li>
                 <button onClick={() => onScrollTo("menu")} className="hover:text-rose-400 transition-colors">
-                  Signature Menu (เมนูเด็ด)
+                  {isTh ? "เมนูเด็ด (Signature Menu)" : "Signature Menu"}
                 </button>
               </li>
               <li>
                 <button onClick={() => onScrollTo("story")} className="hover:text-rose-400 transition-colors">
-                  Our Story &amp; Philosophy (เรื่องราวของเรา)
+                  {isTh ? "สูตรลับน้ำซุป (Our Story)" : "Our Story & Philosophy"}
                 </button>
               </li>
               <li>
                 <button onClick={() => onScrollTo("branches")} className="hover:text-rose-400 transition-colors">
-                  Locations &amp; Hours (สาขาและเวลาเปิด)
+                  {isTh ? "สาขาและเวลาเปิด (Locations)" : "Locations & Hours"}
                 </button>
               </li>
               <li>
                 <button onClick={() => onScrollTo("reviews")} className="hover:text-rose-400 transition-colors">
-                  Customer Reviews (รีวิว)
+                  {isTh ? "รีวิวลูกค้า (Reviews)" : "Customer Reviews"}
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Branches */}
+          {/* Location */}
           <div>
-            <h4 className="font-black text-white text-sm mb-3 uppercase tracking-wider">Branches</h4>
-            <ul className="space-y-2 text-xs text-zinc-400">
+            <h4 className="font-black text-white text-sm mb-3 uppercase tracking-wider">
+              {isTh ? "ตำแหน่งที่ตั้ง" : "Location"}
+            </h4>
+            <ul className="space-y-2 text-sm text-zinc-400">
               <li>
-                <strong className="text-white block">Siam Square Flagship</strong>
-                <span>10:30 AM – 10:00 PM</span>
+                <a href="https://maps.app.goo.gl/4skWQrYykMBoEtAC6" target="_blank" rel="noopener noreferrer" className="hover:text-rose-400 hover:underline transition-colors">
+                  <strong>{isTh ? "40 ซ.เจริญนคร 8 แขวงคลองต้นไทร เขตคลองสาน กทม. 10600" :
+                    "40 Soi Charoennakhon 8, Charoennakhon Rd., Khlong Ton Sai, Khlong San, Bangkok, 10600"}</strong>
+                </a>
+                <strong className="text-white block pt-2">time: 06:30 - 15:00</strong>
               </li>
-              <li className="pt-1">
-                <strong className="text-white block">Thonglor Night Eatery</strong>
-                <span>11:00 AM – 12:00 AM</span>
-              </li>
-              <li className="pt-2 text-rose-400 font-bold">
-                Hotline: 02-123-4567
-              </li>
+
             </ul>
           </div>
 
           {/* Allergy Note */}
           <div>
-            <h4 className="font-black text-white text-sm mb-3 uppercase tracking-wider">Allergy Notice</h4>
-            <p className="text-xs text-zinc-400 leading-relaxed bg-zinc-900/80 p-3.5 rounded-2xl border border-zinc-800">
-              ⚠️ Our tom yum recipes naturally include fresh peanuts, shrimp paste, and shellfish. Please notify our staff of any dietary restrictions.
+            <h4 className="font-black text-white text-sm mb-3 uppercase tracking-wider">
+              {isTh ? "ข้อมูลสำหรับผู้แพ้อาหาร" : "Allergy Notice"}
+            </h4>
+            <p className="text-sm text-zinc-400 leading-relaxed bg-zinc-900/80 p-3.5 rounded-2xl border border-zinc-800">
+              {isTh
+                ? "⚠️ เมนูต้มยำของเรามีส่วนผสมของถั่วลิสง กะปิแท้ และอาหารทะเล กรุณาแจ้งพนักงานหากท่านมีอาการแพ้อาหาร"
+                : "⚠️ Our tom yum recipes naturally include fresh peanuts, shrimp paste, and shellfish. Please notify our staff of any dietary restrictions."}
             </p>
           </div>
 
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-sm text-zinc-500 gap-4">
           <p>&copy; {new Date().getFullYear()} Pouy Tiew Tom Yum Noodle Bar. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span className="hover:text-zinc-400 cursor-pointer">Privacy Policy</span>
             <span>&bull;</span>
             <span className="hover:text-zinc-400 cursor-pointer">Terms of Service</span>
             <span>&bull;</span>
-            <span className="text-rose-500 font-bold flex items-center gap-1">
-              Cooked with <FlameIcon className="w-3.5 h-3.5" /> in Bangkok
+            <span className="text-rose-500 font-bold flex items-center gap-1.5">
+              Cooked with <i className="fa-solid fa-fire text-rose-500"></i> in Bangkok
             </span>
           </div>
         </div>

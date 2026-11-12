@@ -4,15 +4,14 @@ export interface MenuItem {
   id: string;
   name: string;
   nameTh: string;
-  category: "noodle" | "rice" | "appetizers" | "drinks" | "desserts";
-  description: string;
-  descriptionTh: string;
+  category: "noodle" | "rice" | "appetizers" | "drinks" | "add-ons";
+  description?: string;
+  descriptionTh?: string;
   price: number;
-  image: string;
-  spiceLevel: SpiceLevel;
+  spiceLevel?: SpiceLevel;
+  daysAvailable?: string[];
+  image?: string;
   badge?: "Bestseller" | "Chef Choice" | "Must Try" | "Signature" | "Popular";
-  calories?: string;
-  isVegetarian?: boolean;
 }
 
 export interface NoodleOption {
@@ -28,9 +27,47 @@ export interface BrothOption {
   name: string;
   nameTh: string;
   desc: string;
+  descTh?: string;
   extraPrice: number;
   spiceDefault: SpiceLevel;
   color: string;
+  servingStyle?: "soup" | "dry";
+  isYum?: boolean;
+  base?: "pork" | "chicken" | "yentafo";
+}
+
+export interface ServingStyleOption {
+  id: "soup" | "dry";
+  name: string;
+  nameTh: string;
+  desc: string;
+  descTh: string;
+}
+
+export interface YumFlavorOption {
+  id: "yum" | "no-yum";
+  name: string;
+  nameTh: string;
+  desc: string;
+  descTh: string;
+}
+
+export interface MeatBaseOption {
+  id: "pork" | "chicken" | "yentafo";
+  name: string;
+  nameTh: string;
+  desc: string;
+  descTh: string;
+  color: string;
+}
+
+export interface WontonOption {
+  id: string;
+  name: string;
+  nameTh: string;
+  desc: string;
+  descTh: string;
+  price: number;
 }
 
 export interface ToppingOption {

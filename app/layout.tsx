@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,6 +15,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th" className="scroll-smooth">
+      <head>
+        <Script
+          src="https://kit.fontawesome.com/aecb1a01a7.js"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
+
       <body className="min-h-screen bg-[#FFFDF9] text-zinc-900 font-sans antialiased selection:bg-rose-500 selection:text-white">
         {children}
       </body>

@@ -1,214 +1,23 @@
-import { MenuItem, NoodleOption, BrothOption, ToppingOption, ReviewItem } from "../types/menu";
+import { MenuItem } from "../types/menu";
+import { NOODLE_ITEMS } from "./noodles";
+import { RICE_ITEMS } from "./rice";
+import { APPETIZER_ITEMS } from "./appetizers";
+import { DRINK_ITEMS } from "./drinks";
+import { ADDON_ITEMS } from "./addons";
 
+// รวมรายการอาหารทั้งหมดสำหรับหน้าแสดงเมนู (Master Menu Items Array)
 export const MENU_ITEMS: MenuItem[] = [
-  {
-    id: "sig-1",
-    name: "Royal Jumbo Prawn Tom Yum (Nam Khon)",
-    nameTh: "ก๋วยเตี๋ยวต้มยำ",
-    category: "noodle",
-    description: "Our legendary creamy tom yum broth infused with roasted chili paste, evaporated milk, lemongrass, kaffir lime, and fresh giant river prawns.",
-    descriptionTh: "สูตรลับน้ำข้นกลมกล่อม หอมพริกเผาเคี่ยวเอง มะนาวแป้นสดแท้ พร้อมกุ้งแม่น้ำเผาตัวโตเต็มคำ",
-    price: 189,
-    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 2,
-    badge: "Bestseller",
-  },
-  {
-    id: "sig-2",
-    name: "Classic Heritage Pork Tom Yum (Nam Sai)",
-    nameTh: "ก๋วยเตี๋ยวต้มยำหมูสับโบราณ น้ำใสรสจัด",
-    category: "noodle",
-    description: "Clear aromatic broth with minced pork patty, tender sliced pork loin, handmade meatballs, and hand-roasted crushed peanuts.",
-    descriptionTh: "รสชาติต้นตำรับแท้ หมูสับแผ่นนุ่ม ลูกชิ้นหมูโฮมเมด และถั่วลิสงคั่วใหม่หอมกรุ่นทุกชาม",
-    price: 119,
-    image: "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 2,
-    badge: "Signature",
-  },
-  {
-    id: "sig-3",
-    name: "Volcano Seafood Lava Tom Yum",
-    nameTh: "ต้มยำซีฟู้ดภูเขาไฟ ลาวาหม้อไฟ",
-    category: "noodle",
-    description: "Seafood lover's dream: squid rings, jumbo prawns, blue crab claws, and fish balls in our signature double-spicy lava broth.",
-    descriptionTh: "จัดเต็มซีฟู้ดสดจากทะเล กุ้ง หมึก ปู ลูกชิ้นปลาแท้ ซุปต้มยำรสแซ่บเดือดพล่าน",
-    price: 229,
-    image: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 2,
-    badge: "Chef Choice"
-  },
-  {
-    id: "sig-4",
-    name: "Crispy Soft-Boiled Egg Tom Yum Noodle",
-    nameTh: "ก๋วยเตี๋ยวต้มยำไข่ยางมะตูมเยิ้ม หมูกรอบทอง",
-    category: "noodle",
-    description: "Bouncy noodles with molten lava soft-boiled duck egg, golden crispy pork belly, and sweet roasted chili broth.",
-    descriptionTh: "ไข่เป็ดยางมะตูมเยิ้มๆ ตัดกับหมูกรอบกร๊วบ และน้ำซุปต้มยำสามรสเข้มข้นถึงใจ",
-    price: 149,
-    image: "https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 2,
-    badge: "Must Try"
-  },
-  {
-    id: "app-1",
-    name: "Crispy Golden Prawn Wontons",
-    nameTh: "เกี๊ยวกุ้งกรอบทองไส้ทะลัก (8 ชิ้น)",
-    category: "appetizers",
-    description: "Crispy fried golden wontons packed with juicy prawn and minced pork filling. Served with sweet plum chili dip.",
-    descriptionTh: "แป้งเกี๊ยวบางกรอบ ไส้กุ้งและหมูสับแน่นๆ จิ้มน้ำจิ้มบ๊วยเจี่ยสูตรโบราณ",
-    price: 89,
-    image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 0,
-    badge: "Must Try"
-  },
-  {
-    id: "app-2",
-    name: "Garlic Pork Cracklings with Roasted Chili Dip",
-    nameTh: "กากหมูเจียวโบราณ น้ำพริกเผาโฮมเมด",
-    category: "appetizers",
-    description: "Freshly rendered crispy pork cracklings with fried garlic shallots and our house-made spicy sweet chili jam.",
-    descriptionTh: "กากหมูทอดใหม่ทุกวัน กรอบสนั่นไม่อมน้ำมัน พร้อมน้ำพริกเผารสเข้ม",
-    price: 69,
-    image: "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 1,
-  },
-  {
-    id: "app-3",
-    name: "Steamed Pork Shumai Dumplings",
-    nameTh: "ขนมจีบหมูกุ้งจักรพรรดิ (6 ชิ้น)",
-    category: "appetizers",
-    description: "Plump steamed dumplings with seasoned pork and whole prawns, topped with crispy garlic and soy vinegar dipping sauce.",
-    descriptionTh: "ขนมจีบแป้งบาง ไส้หมูผสมกุ้งเนื้อเด้งฉ่ำ โรยกระเทียมเจียวหอมฟุ้ง",
-    price: 99,
-    image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 0,
-  },
-  {
-    id: "drink-1",
-    name: "Signature Cha Yen (Thai Iced Tea with Cream)",
-    nameTh: "ชาไทยพรีเมียม สกัดเข้มฟองนมนุ่ม",
-    category: "drinks",
-    description: "Slow-brewed authentic Ceylon & Thai black tea leaves, sweet condensed milk, and velvety evaporated milk froth.",
-    descriptionTh: "ใบชาแท้เข้มข้น หอมละมุน หวานมันกลมกล่อม ดับความเผ็ดร้อนได้ลงตัวที่สุด",
-    price: 55,
-    image: "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 0,
-    badge: "Bestseller",
-  },
-  {
-    id: "drink-2",
-    name: "Sparkling Butterfly Pea Limeade",
-    nameTh: "อัญชันมะนาวโซดา ฟู่ซ่าชื่นใจ",
-    category: "drinks",
-    description: "Fresh squeezed lime juice, organic butterfly pea tea, and effervescent sparkling soda. Vibrant purple-blue colors!",
-    descriptionTh: "เปรี้ยวซ่า สดชื่น สีสวยธรรมชาติจากดอกอัญชันและมะนาวสดแท้",
-    price: 50,
-    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 0,
-  },
-  {
-    id: "drink-3",
-    name: "Chrysanthemum Herbal Iced Honey Tea",
-    nameTh: "น้ำเก๊กฮวยหอมหวานน้ำผึ้งป่า",
-    category: "drinks",
-    description: "Traditional cooling golden chrysanthemum blossoms brewed with wild mountain honey. Soothing and sweet.",
-    descriptionTh: "เก๊กฮวยแท้ต้มใบเตย ดื่มแก้ร้อนใน รสหวานนุ่มชุ่มคอ",
-    price: 45,
-    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80",
-    spiceLevel: 0,
-  }
+  ...NOODLE_ITEMS,
+  ...RICE_ITEMS,
+  ...APPETIZER_ITEMS,
+  ...DRINK_ITEMS,
+  ...ADDON_ITEMS,
 ];
 
-export const NOODLE_OPTIONS: NoodleOption[] = [
-  { id: "sen-lek", name: "Sen Lek (Thin Rice)", nameTh: "เส้นเล็กเหนียวนุ่ม", desc: "Classic chewy noodles, absorbs maximum broth flavor", icon: "🍜" },
-  { id: "sen-yai", name: "Sen Yai (Wide Rice)", nameTh: "เส้นใหญ่หนานุ่ม", desc: "Silky flat ribbons, tender and smooth texture", icon: "🥢" },
-  { id: "bamee", name: "Bamee (Egg Noodle)", nameTh: "บะหมี่ไข่สด", desc: "Golden springy egg noodles with rich aroma", icon: "🥣" },
-  { id: "woon-sen", name: "Woon Sen (Glass Noodle)", nameTh: "วุ้นเส้นถั่วเขียว", desc: "Light, translucent, healthy & low calorie", icon: "✨" },
-  { id: "mama", name: "Mama (Thai Ramen)", nameTh: "เส้นมาม่าสตรีทฟู้ด", desc: "Iconic crimped street-food noodles, crispy bite", icon: "🔥" },
-];
-
-export const BROTH_OPTIONS: BrothOption[] = [
-  {
-    id: "nam-khon",
-    name: "Creamy Tom Yum (Nam Khon)",
-    nameTh: "ต้มยำน้ำข้นโบราณ",
-    desc: "Silky milk-infused broth, smoked chili jam, fresh lime & fragrant lemongrass",
-    extraPrice: 0,
-    spiceDefault: 2,
-    color: "from-rose-500 to-amber-500",
-  },
-  {
-    id: "nam-sai",
-    name: "Aromatic Clear Tom Yum (Nam Sai)",
-    nameTh: "ต้มยำน้ำใสมะนาวสด",
-    desc: "Light, tangy & invigorating broth with lime, galangal and crushed bird's eye chili",
-    extraPrice: 0,
-    spiceDefault: 2,
-    color: "from-amber-400 to-lime-500",
-  },
-  {
-    id: "dry-tossed",
-    name: "Dry Tossed (Tom Yum Haeng)",
-    nameTh: "ต้มยำแห้งคลุกคลิกทรงเครื่อง",
-    desc: "Tossed noodles with homemade sweet chili glaze, garlic oil & ground peanuts",
-    extraPrice: 0,
-    spiceDefault: 2,
-    color: "from-orange-500 to-red-600",
-  },
-  {
-    id: "super-lava",
-    name: "Super Volcano Seafood Lava",
-    nameTh: "ต้มยำภูเขาไฟลาวาเดือด",
-    desc: "Extra rich prawn head essence, double smoked chili paste & kaffir lime zest",
-    extraPrice: 30,
-    spiceDefault: 2,
-    color: "from-red-600 to-purple-700",
-  },
-];
-
-export const TOPPING_OPTIONS: ToppingOption[] = [
-  { id: "tiger-prawn", name: "Jumbo River Prawn", nameTh: "กุ้งแม่น้ำเผา", price: 50, category: "seafood" },
-  { id: "pork-belly", name: "Crispy Pork Crackling", nameTh: "หมูกรอบทองคำ", price: 35, category: "meat" },
-  { id: "minced-pork", name: "Tender Minced Pork Patty", nameTh: "หมูสับนุ่มหมักซอส", price: 25, category: "meat" },
-  { id: "lava-egg", name: "Molten Lava Duck Egg", nameTh: "ไข่ต้มยางมะตูมเยิ้ม", price: 18, category: "egg" },
-  { id: "wonton", name: "Crispy Golden Wontons", nameTh: "เกี๊ยวกรอบทอดใหม่", price: 20, category: "crunchy" },
-  { id: "fish-balls", name: "Artisanal Pork & Fish Balls", nameTh: "ลูกชิ้นหมู & ปลาแท้", price: 25, category: "meat" },
-  { id: "roasted-peanuts", name: "Extra Roasted Peanuts & Lime", nameTh: "ถั่วคั่วพิเศษ + มะนาวซีก", price: 10, category: "crunchy" },
-];
-
-export const REVIEWS: ReviewItem[] = [
-  {
-    id: "rev-1",
-    name: "Chef Natthapol K.",
-    role: "Michelin Guide Food Critic",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    comment: "The balance of acidity from fresh lime juice and the sweetness of the caramelized shallot chili jam is masterclass. Best tom yum noodles in Bangkok!",
-    commentTh: "น้ำซุปต้มยำที่นี่ทำได้ถึงเครื่องมากๆ เปรี้ยวมะนาวสดแท้ ไม่ใช่ผงชูรส หอมพริกเผาเคี่ยวและกุ้งแม่น้ำสดเด้งสุดๆ",
-    dishLoved: "Royal Jumbo Prawn Tom Yum",
-    verified: true,
-  },
-  {
-    id: "rev-2",
-    name: "Praew Sudarat",
-    role: "Bangkok Food Explorer",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    comment: "The dry tossed Mama tom yum with crispy wontons is addictive! I come here at least twice a week. The spice level 2 is perfection.",
-    commentTh: "มาม่าต้มยำแห้งคือเด็ดที่สุดในสามโลก กากหมูเจียวใหม่ๆ เกี๊ยวกรอบ และไข่ต้มยางมะตูมเยิ้มคือสวรรค์!",
-    dishLoved: "Dry Tossed Street Mama Tom Yum",
-    verified: true,
-  },
-  {
-    id: "rev-3",
-    name: "Alex Thorne",
-    role: "Travel & Culinary Writer",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    comment: "If you want real authentic Thai flavors with a modern aesthetic, Pouy Tiew is the place. Paired with their rich Thai iced tea, it's unbeatable.",
-    commentTh: "รสชาติไทยแท้ที่นำเสนอในสไตล์โมเดิร์นได้อย่างยอดเยี่ยม สะอาด อร่อย ชาไทยเข้มข้นมาก แนะนำให้ทุกคนลอง",
-    dishLoved: "Volcano Seafood Lava Tom Yum",
-    verified: true,
-  },
-];
-
+// Re-export all sub-modules for convenience & backward compatibility
+export * from "./noodles";
+export * from "./broths";
+export * from "./appetizers";
+export * from "./rice";
+export * from "./drinks";
+export * from "./addons";
